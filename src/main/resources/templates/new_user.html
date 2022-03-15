@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+<body>
+<div align="center">
+    <h2>Новый пользователь</h2>
+    <form th:method="Post" th:action="@{/admin/new}" th:object="${user}">
+
+        <input name="Username" type="text" th:field="*{username}"  placeholder="Username" autofocus="autofocus"/>
+        <br>
+        <input name="Password" type="text" th:field="*{password}"   placeholder="Password"  autofocus="autofocus"/>
+        <br>
+        <br>
+        <input type="submit" value="Добавить"/>
+    </form>
+</div>
+</body>
+</html>
