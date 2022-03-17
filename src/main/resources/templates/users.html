@@ -28,13 +28,13 @@
             <div th:each="role:${user.getRoles()}">[[${role.getName()}]]</div>
             </td>
                 <td>
-                <form th:method="GET" th:action="@{/admin/{id}(id=${user.getId()})}">
-                <input type="submit" value="Обновить">
+                <form th:method="GET"  th:action="@{/admin/{id}(id=${user.getId()})}">
+                <button type="submit">Обновить</button>
                 </form>
                 <br>
                 <br>
-                <form th:method="POST" th:action="@{/admin/{id}/delete(id=${user.getId()})}">
-                    <input type="submit" value="Удалить"/>
+                    <form th:method="POST" th:action="@{/admin/{id}/delete(id=${user.getId()})}">
+                    <button type="submit">Удалить</button>
                 </form>
             </td>
         </tr>
