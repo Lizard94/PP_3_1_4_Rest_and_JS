@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,9 +11,6 @@ import ru.kata.spring.boot_security.demo.dao.RoleRepository;
 import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -24,17 +20,18 @@ import java.util.Optional;
 @Transactional
 public class UserService implements UserDetailsService {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @Override
@@ -67,21 +64,25 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean deleteUser(Long id) {
-        if (userRepository.findById(id).isPresent()) {
-            userRepository.deleteById(id);
-            return true;
-        }
-        return false;
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+
     }
 
     public List<User> allUsers() {
         return userRepository.findAll();
     }
 
-    public void update(User user) {
-        em.merge(user);
+    public void  update(User user) {
+        userRepository.update(user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getId());
+
     }
+
+    public User findByName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+
 
 
 }

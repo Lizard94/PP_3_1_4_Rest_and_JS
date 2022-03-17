@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update User</title>
-</head>
-<body>
-<div align="center">
-    <h2> Update User</h2>
-    <form  th:method="Post" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
-        <label for="name">Name: </label>
-        <input type="text" th:field="*{name}" id="name"/>
-
-        <br>
-
-        <label for="lastName">Last Name: </label>
-        <input type="text" th:field="*{lastName}" id="lastName"/>
-
-        <br>
-
-        <label for="age">Age: </label>
-        <input type="text" th:field="*{age}" id="age"/>
-
-        <br>
-
-        <input type="submit" value="Update User"/>
-
+    <title>Edit User</title>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Выйти из учетной записи</button>
     </form>
+</head>
+<div align="center">
+    <h2>Изменить пользователя</h2>
+<body>
+<form th:action="@{/admin/{id}(id=${user.getId()})}"
+      th:object="${user}" method="POST">
+    <input type="hidden" th:field="*{id}">
+    <input name="Username" type="text" th:field="*{username}"  placeholder="Username" autofocus="autofocus"/>
+    <br>
+    <br>
+    <input name="Password" type="text" th:field="*{password}"   placeholder="Password"  autofocus="autofocus"/
+    <br/>
+    <br/>
+    <br>
+    <input type="submit" value="Изменить"/>
+</form>
+<br/>
+<a href="/admin/">Назад</a>
 </div>
 </body>
 </html>

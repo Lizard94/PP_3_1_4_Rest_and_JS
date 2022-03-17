@@ -5,6 +5,9 @@
     <title>New User</title>
 </head>
 <body>
+<form th:action="@{/logout}" th:method="POST">
+    <button type="submit">Выйти из учетной записи </button>
+</form>
 <div align="center">
     <h2>Новый пользователь</h2>
     <form th:method="Post" th:action="@{/admin/new}" th:object="${user}">
@@ -16,6 +19,9 @@
         <br>
         <input type="submit" value="Добавить"/>
     </form>
+    <br>
+    <br>
+    <a href="/admin/">Назад</a>
 </div>
 </body>
 </html>

@@ -25,7 +25,8 @@ public class User implements UserDetails {
     private String password;
 
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER )
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     private Set <Role> roles;
 
     public User() {
@@ -41,9 +42,9 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return username;
-    }
+   // public String getName() {
+       // return username;
+   // }
 
     public void setUsername(String username) {
         this.username = username;
@@ -73,7 +74,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getName();
+        return username;
     }
 
     @Override
@@ -96,12 +97,17 @@ public class User implements UserDetails {
         return true;
     }
 
+
+
+
     @Override
     public String toString() {
+
         return "User{" +
                 "id=" + id +
-                ", name='" + username + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

@@ -12,7 +12,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Controller
-@RequestMapping
+@RequestMapping("/registration")
 public class RegistrationController {
     private final UserService userService;
 
@@ -21,19 +21,15 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
-    public String getLogin() {
-        return "login";
 
-    }
 
-    @GetMapping("/registration")
+    @GetMapping
     public String registration(Model model) {
         model.addAttribute("userNew", new User());
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping
     public String SaveUser(@ModelAttribute("userNew") User userNew) {
         userService.save(userNew);
         return "redirect:/user";
