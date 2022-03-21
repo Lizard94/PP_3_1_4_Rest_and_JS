@@ -2,20 +2,24 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    private UserService userService;
+    private final UserService userService;
+
 
     @Autowired
     public AdminController(UserService userService) {
@@ -23,9 +27,13 @@ public class AdminController {
     }
 
     @GetMapping
-    public String userList(Model model) {
+    public String userList(Model model, Authentication authentication) {
         List<User> list = userService.allUsers();
+        List<Role> listRoles = userService.allRoles();
         model.addAttribute("userList", list);
+        model.addAttribute("listRoles", listRoles);
+        model.addAttribute("userNew", new User());
+        model.addAttribute("userGet", userService.findByEmail(authentication.getName()));
         return "users";
     }
 
@@ -42,22 +50,22 @@ public class AdminController {
     }
 
 
+    //@GetMapping("/{id}")
+    // public String getUser(Model model, Authentication authentication) {
+    // String username = authentication.getName();
+    // model.addAttribute("user", userService.findByEmail(username));
+    // return "user";
+    //}
 
-  // @GetMapping("/{id}")
-   // public String getUser(Model model, Authentication authentication) {
-     //   String username = authentication.getName();
-     //   model.addAttribute("user", userService.findByName(username));
-       // return "user";
-   // }
+    //  @GetMapping("/{id}")
+    // public User getUser(@PathVariable("id") Long id, Model model) {
+    //   return   model.addAttribute("userGet", userService.findById(id));
 
-    @GetMapping("{id}")
-    public String getUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        return "update_user";
-    }
+    // }
+
 
     @PostMapping("{id}")
-    public String updateUser(@PathVariable("id") Long id,@ModelAttribute("user") User user) {
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         userService.update(user);
         return ("redirect:/admin");
     }

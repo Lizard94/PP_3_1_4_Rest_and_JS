@@ -11,13 +11,31 @@
 <div align="center">
     <h2>Новый пользователь</h2>
     <form th:method="Post" th:action="@{/admin/new}" th:object="${user}">
-
-        <input name="Username" type="text" th:field="*{username}"  placeholder="Username" autofocus="autofocus"/>
-        <br>
-        <input name="Password" type="text" th:field="*{password}"   placeholder="Password"  autofocus="autofocus"/>
+        <label for="firstName">First name</label>
+        <input  type="text" th:field="*{firstName}"  id="firstName" />
         <br>
         <br>
-        <input type="submit" value="Добавить"/>
+        <label for="lastName">Last name</label>
+        <input  type="text" th:field="*{lastName}"  id="lastName" />
+        <br>
+        <br>
+        <label for="age">Age</label>
+        <input  type="text" th:field="*{age}"  id="age" />
+        <br>
+        <br>
+        <label for="email">Email</label>
+        <input  type="text" th:field="*{email}"  id="email" />
+        <br>
+        <br>
+        <label for="password">Password</label>
+        <input  type="text" th:field="*{password}"  id="password" />
+        <br>
+        <br>
+        <label for="roles">Role</label>
+        <input  type="text" th:field="*{roles}"  id="roles" />
+        <br>
+        <br>
+        <input type="submit" value="Add new user"/>
     </form>
     <br>
     <br>

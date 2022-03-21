@@ -9,7 +9,7 @@
     <h2>Регистрация</h2>
     <form th:method="Post" th:action="@{/registration}" th:object="${userNew}" >
 
-        <input name="Username" type="text" th:field="*{username}"  placeholder="Username" autofocus="autofocus"/>
+        <input name="Email" type="text" th:field="*{email}"  placeholder="Email" autofocus="autofocus"/>
         <br>
         <input name="Password" type="text" th:field="*{password}"   placeholder="Password"  autofocus="autofocus"/>
         <br>

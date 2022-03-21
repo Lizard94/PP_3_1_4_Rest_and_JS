@@ -22,7 +22,6 @@ public class RegistrationController {
     }
 
 
-
     @GetMapping
     public String registration(Model model) {
         model.addAttribute("userNew", new User());

@@ -13,14 +13,31 @@
 <form th:action="@{/admin/{id}(id=${user.getId()})}"
       th:object="${user}" method="POST">
     <input type="hidden" th:field="*{id}">
-    <input name="Username" type="text" th:field="*{username}"  placeholder="Username" autofocus="autofocus"/>
+    <label for="firstName">First name</label>
+    <input  type="text" th:field="*{firstName}"  id="firstName" />
     <br>
     <br>
-    <input name="Password" type="text" th:field="*{password}"   placeholder="Password"  autofocus="autofocus"/>
-    <br/>
-    <br/>
+    <label for="lastName">Last name</label>
+    <input  type="text" th:field="*{lastName}"  id="lastName" />
     <br>
-    <input type="submit" value="Изменить"/>
+    <br>
+    <label for="age">Age</label>
+    <input  type="text" th:field="*{age}"  id="age" />
+    <br>
+    <br>
+    <label for="email">Email</label>
+    <input  type="text" th:field="*{email}"  id="email" />
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <input  type="text" th:field="*{password}"  id="password" />
+    <br>
+    <br>
+    <label for="roles">Role</label>
+    <input  type="text" th:field="*{roles}"  id="roles" />
+    <br>
+    <br>
+    <input type="submit" value="Edit"/>
 </form>
 <br/>
 <a href="/admin/">Назад</a>

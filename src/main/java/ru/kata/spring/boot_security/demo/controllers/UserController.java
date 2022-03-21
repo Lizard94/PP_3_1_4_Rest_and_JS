@@ -22,10 +22,10 @@ public class UserController {
     @GetMapping()
     public String getUser(Model model, Authentication authentication) {
         String username = authentication.getName();
-        model.addAttribute("user", userService.findByName(username));
+        model.addAttribute("user", userService.findByEmail(username));
         return "user";
     }
-    }
+}
 
 
 
