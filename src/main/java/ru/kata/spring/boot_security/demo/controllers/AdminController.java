@@ -37,11 +37,6 @@ public class AdminController {
         return "users";
     }
 
-    @GetMapping("/new")
-    public String saveUser(Model model) {
-        model.addAttribute("user", new User());
-        return "new_user";
-    }
 
     @PostMapping("/new")
     public String newUser(@ModelAttribute("user") User user) {
@@ -50,27 +45,13 @@ public class AdminController {
     }
 
 
-    //@GetMapping("/{id}")
-    // public String getUser(Model model, Authentication authentication) {
-    // String username = authentication.getName();
-    // model.addAttribute("user", userService.findByEmail(username));
-    // return "user";
-    //}
-
-    //  @GetMapping("/{id}")
-    // public User getUser(@PathVariable("id") Long id, Model model) {
-    //   return   model.addAttribute("userGet", userService.findById(id));
-
-    // }
-
-
-    @PostMapping("{id}")
+    @PatchMapping("{id}")
     public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         userService.update(user);
         return ("redirect:/admin");
     }
 
-    @PostMapping("{id}/delete")
+    @DeleteMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";

@@ -101,7 +101,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body offset-sm-4 text-center">
-                                                                    <form class="row g-3" th:method="Post" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
+                                                                    <form class="row g-3" th:method="Patch" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
                                                                         <div class="row">
                                                                             <div class="form-group col-xs-12">
                                                                                 <div class="control-group required">
@@ -160,7 +160,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body offset-sm-4 text-center">
-                                                                    <form th:method="Post" th:action="@{/admin/{id}/delete(id=${user.getId()})}" th:object="${user}">
+                                                                    <form th:method="Delete" th:action="@{/admin/delete/{id}(id=${user.getId()})}" th:object="${user}">
                                                                         <div class="row">
                                                                             <div class="form-group col-xs-12">
                                                                                 <div class="control-group required">
