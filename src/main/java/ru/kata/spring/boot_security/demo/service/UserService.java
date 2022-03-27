@@ -12,13 +12,17 @@ import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.*;
+
 
 
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
-
+    @PersistenceContext
+    private EntityManager em;
 
     private final UserRepository userRepository;
 
@@ -78,6 +82,7 @@ public class UserService implements UserDetailsService {
 
     public void update(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
 
     }
@@ -86,7 +91,15 @@ public class UserService implements UserDetailsService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-}
+
+
+    }
+
+
+
+
+
+
 
 
 
